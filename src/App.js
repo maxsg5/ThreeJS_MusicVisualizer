@@ -218,7 +218,7 @@ export default class App
     onRender()
     {
         this.renderer.render(this.scene, this.camera);
-        this.controls.update();
+        //this.controls.update();
         //make plane rough
         for (let index = 0; index < this.mesh2.geometry.attributes.position.array.length -1; index += 3) {
             //every 3 values in the array is a vertex
