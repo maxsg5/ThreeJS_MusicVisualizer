@@ -90,24 +90,34 @@ export default class App
 
         // sound spheres
         this.mesh1 = new THREE.Mesh( this.sphere, this.material1 );
-        this.mesh1.position.set( 0, 0, -1000 );
+        this.mesh1.position.set( 0, 10, -1000 );
         this.scene.add( this.mesh1 );
 
         this.mesh2 = new THREE.Mesh( this.plane, this.material2 );
-        this.mesh2.position.set( 0, -50, -1000 );
+        this.mesh2.position.set( 0, -100, -1000 );
         //rotate the plane around the x axis
         this.mesh2.rotateX(90);
         this.scene.add( this.mesh2 );
+
+        this.mesh3 = new THREE.Mesh( this.plane, this.material2 );
+        this.mesh3.position.set( 0, 100, -1000 );
+        //rotate the plane around the x axis
+        this.mesh3.rotateX(90);
+        this.scene.add( this.mesh3 );
 
         //add a point light with a white color
         const light = new THREE.PointLight( 0xffffff, 1000, 100);
         light.position.set(0, 0, -80);
         this.scene.add(light);
         
-        this.multiplier = {noiseValue:0,multi:1};
-        this.gui.add(this.multiplier, 'multi', 0, 10).onChange(() => {
+        this.multiplier = {noiseValue:0,multi:10,sphereMulti:1};
+        this.gui.add(this.multiplier, 'multi', 0, 20).onChange(() => {
             this.multi = this.multiplier.multi;
         }).name('Amplitude Multiplier');
+
+        this.gui.add(this.multiplier, 'sphereMulti', 1, 10).onChange(() => {
+            this.sphereMulti = this.multiplier.sphereMulti;
+        }).name('Sphere Multiplier');
 
         this.sphereColor = {color:0xff1100};
         this.gui.addColor(this.sphereColor, 'color').onChange(() => {
@@ -128,6 +138,7 @@ export default class App
             let y = this.mesh2.geometry.attributes.position.array[index + 1];
             let noiseValue = this.noise.noise2D(x, y);
             this.mesh2.geometry.attributes.position.array[index + 2] = noiseValue * this.multiplier.noiseValue;
+            this.mesh3.geometry.attributes.position.array[index + 2] = noiseValue * this.multiplier.noiseValue;
         }
 
         
@@ -189,7 +200,7 @@ export default class App
 
             // // //change the radius of the sphere based on the frequency of the sound
             // //let newScale = this.analyser.getAverageFrequency()/50;
-            this.mesh1.scale.set(lowerAvgFr*1, lowerAvgFr*1, lowerAvgFr*1);
+            this.mesh1.scale.set(lowerAvgFr*this.multiplier.sphereMulti, lowerAvgFr*this.multiplier.sphereMulti, lowerAvgFr*this.multiplier.sphereMulti);
             this.multiplier.noiseValue = lowerAvgFr * this.multiplier.multi;
             
             // TODO: change the color of the sphere based on the frequency of the sound
@@ -217,8 +228,10 @@ export default class App
             let distance = (this.noise.noise2D(x+time * 0.0003, y+time * 0.0001) + 0) * modulate(this.upperAvgFr, 0, 1, 0.5, 4) * this.multiplier.noiseValue;
             let noiseValue = this.noise.noise2D(x, y);
             this.mesh2.geometry.attributes.position.array[index + 2] = distance; //noiseValue * this.multiplier.noiseValue;
+            this.mesh3.geometry.attributes.position.array[index + 2] = distance; //noiseValue * this.multiplier.noiseValue;
             //update the position of the vertex
             this.mesh2.geometry.attributes.position.needsUpdate = true;
+            
         }
 
         
