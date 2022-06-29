@@ -1,0 +1,100 @@
+*
+{
+    margin :0;
+    padding: 0;
+}
+
+body
+{
+    background: black;
+}
+
+html, body
+{
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+
+#audio
+{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+}
+/* Removes mute-button */
+audio::-webkit-media-controls-mute-button {
+    display: none;
+}
+#playBtn{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    height: 50px;
+    width: 100px;
+}
+
+
+input{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50px;
+    width: 100px;
+    color: white;
+}
+
+#thefile{
+    width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      color: white;
+      /* z-index: 1; */
+  }
+  
+  label.file{
+    background-color: white;
+
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    font-size: 1.25em;
+    font-weight: 700;
+    box-shadow: 0 20px 60px var(--shadowColorFaint);
+  
+    cursor: pointer;
+  }
+  
+  
+  label.file:hover{
+    background-color: white;
+    transform: translate3d(-50%, -55%, 0);
+  }
+  
+  label.file:active{
+    background-color: white;
+    transform: translate3d(-50%, -45%, 0);
+  }
+  
+  label.file.normal{
+    transform: translate3d(10%, 50%, 0);
+    padding: 0.2rem 2rem;
+    font-size: 1rem;
+    top: 60px;
+    left: 0;
+
+  }
