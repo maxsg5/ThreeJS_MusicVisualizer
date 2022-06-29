@@ -236,6 +236,7 @@ export default class App
 
         
         
+        
 
         //needs to come at the end of onRender
         this.stats.end();
