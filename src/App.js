@@ -183,7 +183,7 @@ export default class App
 
         }).name('Plane Rotation X');
 
-        // this.rotationSpeed = {speed:10};
+        this.rotationSpeed = {speed:10};
         // this.gui.add(this.rotationSpeed, 'speed', 5, 10).onChange(() => {
         //     this.rotationSpeed = this.rotationSpeed.speed;
         // }).name('Rotation Speed');
