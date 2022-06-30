@@ -182,6 +182,11 @@ export default class App
             console.log('Radians: ' + this.planeRotationX.rotation* (Math.PI / 180));
 
         }).name('Plane Rotation X');
+
+        // this.rotationSpeed = {speed:10};
+        // this.gui.add(this.rotationSpeed, 'speed', 5, 10).onChange(() => {
+        //     this.rotationSpeed = this.rotationSpeed.speed;
+        // }).name('Rotation Speed');
         
         //make plane rough
         for (let index = 0; index < this.mesh2.geometry.attributes.position.array.length -3; index += 3) {
@@ -230,7 +235,7 @@ export default class App
         
         // Create a generic rotation matrix that will rotate an object
         // The math here just makes it rotate every 'period' seconds.
-        this.matrix.makeRotationY(dt * 2 * Math.PI / 5);
+        this.matrix.makeRotationY(dt * 2 * Math.PI / this.rotationSpeed.speed);
 
         // Apply matrix like this to rotate the camera.
         this.camera.position.applyMatrix4(this.matrix);
